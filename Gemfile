@@ -3,11 +3,23 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
 
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# Use postgres for production
+gem 'pg', group: :production
+
+# Heroku requirement
+gem 'rails_12factor', group: :production
+
+# Use haml-rails for HTML abstraction markup language
+gem "haml-rails"
 
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.0'
+
+# Use bootstrap for css styles
+gem 'bootstrap-sass', '~> 3.1.1'
+
+# Use bootswatch for theming
+gem 'bootswatch-rails'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
@@ -41,5 +53,19 @@ end
 # Use Capistrano for deployment
 # gem 'capistrano', group: :development
 
-# Use debugger
-# gem 'debugger', group: [:development, :test]
+group :development, :test do
+  gem 'pry'
+  gem 'pry-rails'
+  gem 'pry-byebug'
+  gem 'awesome_print'
+  gem 'hirb'
+  gem 'pry-stack_explorer'
+  gem 'coolline'
+  gem 'rspec-rails'
+  gem 'debugger'
+  gem 'better_errors'
+  gem 'binding_of_caller'
+
+  # Use sqlite3 as the database for Active Record
+  gem 'sqlite3'
+end
