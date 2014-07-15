@@ -3,7 +3,19 @@ var router = express.Router();
 
 /* GET home page. */
 router.get('/', function(req, res) {
-  res.render('index', { title: 'Express' });
+	var db = req.db;
+	var collection = db.get('case');
+	collection.find({},{},function(e,cases){
+
+		debugger;
+
+		res.render('index', {
+			title: 'Express',
+			caseList: cases
+		});
+
+	});
+	// res.render('index', { title: 'Express' });
 });
 
 module.exports = router;

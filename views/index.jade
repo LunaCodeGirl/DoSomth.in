@@ -3,3 +3,12 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  hr
+  ul
+    each item, i in caseList
+      li
+        b= item.name
+        | - 
+        small= item.description
+        | : 
+        i= item.votes

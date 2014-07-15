@@ -4,6 +4,7 @@ var favicon = require('static-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var session = require('express-session');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -19,8 +20,19 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
 app.use(cookieParser());
+app.use(session({secret: 'fAUj8xbD3kc5Agm46BqDQm7N817I6Wlt'}));
 app.use(require('less-middleware')(path.join(__dirname, 'public')));
 app.use(express.static(path.join(__dirname, 'public')));
+
+// Database Setup
+var mongo = require('mongodb');
+var monk = require('monk');
+var db = monk('dosomthin:KrmQIWADgli6f9IpHb0O@ds027699.mongolab.com:27699/dosomthin');
+
+app.use(function(req,res,next){
+    req.db = db;
+    next();
+});
 
 app.use('/', routes);
 app.use('/users', users);
